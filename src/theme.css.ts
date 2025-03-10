@@ -28,7 +28,7 @@ globalStyle("body", {
   display: "flex",
   placeItems: "center",
   minWidth: "320px",
-  minHeight: "100vh",
+  minHeight: "100dvh",
   fontFamily: "Helvetica, Arial, sans-serif",
   // Use light mode as default
   backgroundColor: vars.color.lightBackground,
@@ -42,7 +42,7 @@ globalStyle("#root", {
   justifyContent: "center",
   width: "100%",
   minWidth: "320px",
-  minHeight: "100vh",
+  minHeight: "100dvh",
   position: "relative",
   overflow: "hidden",
 })

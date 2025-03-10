@@ -8,7 +8,7 @@ export const scrim = style({
   justifyContent: "center",
   padding: "20px",
   width: "100%",
-  minHeight: "100vh",
+  minHeight: "100dvh",
   backgroundColor: vars.color.lightScrim,
   zIndex: 1000,
   backdropFilter: "blur(10px)",
@@ -28,7 +28,7 @@ export const spark = style({
 export const confettiContainer = style({
   position: "relative",
   width: "100%",
-  height: "100vh",
+  height: "100dvh",
 })
 export const confetti = style({
   borderRadius: "50%",
