@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ExpoScaleEase } from "gsap/EasePack"
@@ -7,12 +7,18 @@ import { Menu } from "./Menu.tsx"
 import { Confetti } from "./Confetti.tsx"
 import * as styles from "./styles.css.ts"
 import { Spark } from "./Spark.tsx"
-
+import { Drawer } from "./Drawer.tsx"
+import { ConfigProvider, theme } from "antd"
 gsap.registerPlugin(ExpoScaleEase)
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(isDarkModePreferred())
+  const [open, setOpen] = useState(false)
   const [shape, setShape] = useState<"circle" | "square">("circle")
+
+  useEffect(() => {
+    if (isDarkModePreferred()) document.body.classList.add("dark-mode")
+  }, [])
 
   useGSAP(() => {
     gsap.utils.toArray<HTMLElement>(".confetti").forEach((confetti) => {
@@ -39,7 +45,11 @@ function App() {
   })
 
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      }}
+    >
       <div className={styles.confettiContainer}>
         {Array.from({ length: 30 }).map((_, index) => (
           <Confetti key={index} index={index} shape={shape} />
@@ -49,15 +59,21 @@ function App() {
         <Spark />
         <Menu
           isDarkMode={isDarkMode}
+          openDrawer={() => setOpen(true)}
           shape={shape}
           setShape={setShape}
           toggleDarkMode={() => {
             setIsDarkMode((prevMode: boolean) => !prevMode)
             document.body.classList.toggle("dark-mode")
+            document.documentElement.style.setProperty(
+              "--theme",
+              isDarkMode ? "light" : "dark"
+            )
           }}
         />
+        <Drawer open={open} setOpen={setOpen} />
       </div>
-    </>
+    </ConfigProvider>
   )
 }
 

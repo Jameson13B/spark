@@ -35,3 +35,24 @@ export const confetti = style({
   position: "absolute",
   top: "100%",
 })
+
+export const drawer = style({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  height: "100%",
+})
+export const animationBar = style({
+  borderRadius: "10px",
+  height: "1%",
+  margin: "1% 0",
+  backgroundColor:
+    vars.color[
+      `palette${(Math.floor(Math.random() * 5) + 1) as 1 | 2 | 3 | 4 | 5}`
+    ],
+})
+export const drawerDetails = style({
+  textAlign: "center",
+  width: "100%",
+  height: "97%",
+})

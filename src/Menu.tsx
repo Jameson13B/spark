@@ -10,11 +10,13 @@ import {
 
 export const Menu = ({
   isDarkMode,
+  openDrawer,
   shape,
   setShape,
   toggleDarkMode,
 }: {
   isDarkMode: boolean
+  openDrawer: () => void
   shape: "circle" | "square"
   setShape: (shape: "circle" | "square") => void
   toggleDarkMode: () => void
@@ -39,7 +41,11 @@ export const Menu = ({
         onClick={toggleDarkMode}
         tooltip={isDarkMode ? "Light Mode" : "Dark Mode"}
       />
-      <FloatButton icon={<InfoCircleOutlined />} tooltip="Info about Spark" />
+      <FloatButton
+        icon={<InfoCircleOutlined />}
+        tooltip="Info about Spark"
+        onClick={openDrawer}
+      />
     </FloatButton.Group>
   )
 }
