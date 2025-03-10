@@ -6,7 +6,7 @@ import * as styles from "./styles.css"
 import { sparksList } from "./sparks.ts"
 
 export const Spark: React.FC = () => {
-  const [sparks, setSparks] = useState(sparksList)
+  const [sparks, setSparks] = useState(shuffle(sparksList))
 
   useGSAP(() => {
     gsap.to(".spark", {
@@ -41,4 +41,11 @@ export const Spark: React.FC = () => {
   }, [setSparks, sparks])
 
   return <h1 className={styles.spark + " spark"}>{sparks[0].text}</h1>
+}
+
+const shuffle = (array: { id: number; text: string }[]) => {
+  return array
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value)
 }
