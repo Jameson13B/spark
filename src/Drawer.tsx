@@ -76,8 +76,8 @@ export const Drawer = ({
           <div id="drawer-details" className={styles.drawerDetails}>
             <h2>Spark</h2>
             <h4>
-              Spark is a simple, elegant, and peaceful application to get a
-              spark of inspiration.
+              Spark is a simple, elegant, and peaceful way to get a spark of
+              inspiration.
             </h4>
             <p>
               The goal is to provide peace, confidence, happiness, and
