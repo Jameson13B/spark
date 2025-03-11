@@ -13,11 +13,11 @@ export const sparksList = [
   },
   {
     id: 4,
-    text: `"It’s a great day to start giving a fuck."`,
+    text: `"It's a great day to start giving a f#ck."`,
   },
   {
     id: 5,
-    text: `"Life is pain, this is difficult, don’t resist it, it’s going to be okay."`,
+    text: `"Life is pain, this is difficult, don't resist it, it's going to be okay."`,
   },
   {
     id: 6,
