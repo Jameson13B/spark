@@ -3,8 +3,8 @@ import { Drawer as AntdDrawer } from "antd"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 
-import * as styles from "./styles.css"
-import { vars } from "./theme.css"
+import * as styles from "./styles/styles.css"
+import tokens from "./styles/theme.css"
 
 export const Drawer = ({
   open,
@@ -16,7 +16,7 @@ export const Drawer = ({
   const animationBarRef = useRef<HTMLDivElement>(null)
   const colorIndexRef = useRef<number>(0)
 
-  const paletteKeys: Array<keyof typeof vars.color> = [
+  const paletteKeys: Array<keyof typeof tokens.colors> = [
     "palette1",
     "palette2",
     "palette3",
@@ -34,10 +34,10 @@ export const Drawer = ({
 
       gsap.timeline({ repeat: -1 }).fromTo(
         animationBarRef.current,
-        { backgroundColor: vars.color[paletteKeys[colorIndexRef.current]] },
+        { backgroundColor: tokens.colors[paletteKeys[colorIndexRef.current]] },
         {
           backgroundColor:
-            vars.color[
+            tokens.colors[
               paletteKeys[(colorIndexRef.current + 1) % paletteKeys.length]
             ],
           duration: 2,
@@ -45,7 +45,7 @@ export const Drawer = ({
           onUpdate: () => {
             if (animationBarRef.current)
               animationBarRef.current.style.backgroundColor =
-                vars.color[paletteKeys[colorIndexRef.current]]
+                tokens.colors[paletteKeys[colorIndexRef.current]]
           },
           onComplete: () => {
             colorIndexRef.current =

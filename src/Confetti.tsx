@@ -1,5 +1,5 @@
-import * as styles from "./styles.css.ts"
-import { vars } from "./theme.css.ts"
+import * as styles from "./styles/styles.css.ts"
+import tokens from "./styles/theme.css.ts"
 
 export const Confetti = ({
   index,
@@ -17,7 +17,7 @@ export const Confetti = ({
       style={{
         borderRadius: shape === "circle" ? "50%" : "16px",
         backgroundColor:
-          vars.color[
+          tokens.colors[
             `palette${(Math.floor(Math.random() * 5) + 1) as 1 | 2 | 3 | 4 | 5}`
           ],
         height: randomSize,

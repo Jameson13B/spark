@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 
-import * as styles from "./styles.css"
+import * as styles from "./styles/styles.css"
 import { sparksList } from "./sparks.ts"
 
 export const Spark: React.FC = () => {

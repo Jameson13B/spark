@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ExpoScaleEase } from "gsap/EasePack"
 
 import { Menu } from "./Menu.tsx"
 import { Confetti } from "./Confetti.tsx"
-import * as styles from "./styles.css.ts"
+import * as styles from "./styles/styles.css.ts"
 import { Spark } from "./Spark.tsx"
 import { Drawer } from "./Drawer.tsx"
 import { ConfigProvider, theme } from "antd"
+import { useDarkMode } from "./styles/useDarkMode.tsx"
+import { darkTheme, lightTheme } from "./styles/theme.css.ts"
+
 gsap.registerPlugin(ExpoScaleEase)
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(isDarkModePreferred())
+  const { isDarkMode, setIsDarkMode } = useDarkMode(lightTheme, darkTheme)
   const [open, setOpen] = useState(false)
   const [shape, setShape] = useState<"circle" | "square">("circle")
-
-  useEffect(() => {
-    if (isDarkModePreferred()) document.body.classList.add("dark-mode")
-  }, [])
 
   useGSAP(() => {
     gsap.utils.toArray<HTMLElement>(".confetti").forEach((confetti) => {
@@ -55,21 +54,14 @@ function App() {
           <Confetti key={index} index={index} shape={shape} />
         ))}
       </div>
-      <div className={`${styles.scrim} ${isDarkMode ? "dark-mode" : ""}`}>
+      <div className={styles.scrim}>
         <Spark />
         <Menu
           isDarkMode={isDarkMode}
           openDrawer={() => setOpen(true)}
           shape={shape}
           setShape={setShape}
-          toggleDarkMode={() => {
-            setIsDarkMode((prevMode: boolean) => !prevMode)
-            document.body.classList.toggle("dark-mode")
-            document.documentElement.style.setProperty(
-              "--theme",
-              isDarkMode ? "light" : "dark"
-            )
-          }}
+          toggleDarkMode={() => setIsDarkMode((prevMode: boolean) => !prevMode)}
         />
         <Drawer open={open} setOpen={setOpen} />
       </div>
@@ -78,14 +70,3 @@ function App() {
 }
 
 export default App
-
-function isDarkModePreferred() {
-  if (window.matchMedia) {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return true
-    } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-      return false
-    }
-  }
-  return false
-}
