@@ -35,6 +35,16 @@ export const spark = style({
   textAlign: "center",
   color: tokens.colors.text,
 })
+export const divider = style({
+  position: "absolute",
+  bottom: 0,
+  width: "100%",
+  height: "6px",
+  margin: "0",
+  zIndex: 1000,
+  backgroundColor: "transparent",
+  border: "none",
+})
 
 // Scrim Styles
 export const scrim = style({
@@ -83,4 +93,56 @@ export const animationBar = style({
     tokens.colors[
       `palette${(Math.floor(Math.random() * 5) + 1) as 1 | 2 | 3 | 4 | 5}`
     ],
+})
+
+// Add Quote Styles
+export const addQuote = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+})
+export const feedback = style({
+  color: tokens.colors.text,
+  margin: "10px 0",
+  fontSize: "16px",
+  fontWeight: "bold",
+  textAlign: "center",
+  width: "100%",
+})
+export const quoteInput = style({
+  width: "100%",
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  padding: "5px 10px",
+  fontSize: "16px",
+  margin: "10px 0",
+})
+export const radioContainer = style({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+})
+export const radioButton = style({
+  margin: "0 10px",
+})
+export const radioLabel = style({
+  fontSize: "16px",
+  ":first-of-type": {
+    marginRight: 24,
+  },
+})
+export const button = style({
+  width: "100%",
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  padding: "5px 10px",
+  fontSize: "16px",
+  margin: "10px 0",
+})
+export const primaryButton = style({
+  backgroundColor: tokens.colors.palette1,
+  color: tokens.colors.text,
+  borderColor: tokens.colors.palette1,
 })

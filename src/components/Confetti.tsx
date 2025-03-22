@@ -1,5 +1,5 @@
-import * as styles from "./styles/styles.css.ts"
-import tokens from "./styles/theme.css.ts"
+import * as styles from "../styles/styles.css"
+import tokens from "../styles/theme.css"
 
 export const Confetti = ({
   index,

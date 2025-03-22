@@ -3,11 +3,11 @@ import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ExpoScaleEase } from "gsap/EasePack"
 
-import { Menu } from "./Menu.tsx"
-import { Confetti } from "./Confetti.tsx"
+import { Menu } from "./components/Menu.tsx"
+import { Confetti } from "./components/Confetti.tsx"
 import * as styles from "./styles/styles.css.ts"
-import { Spark } from "./Spark.tsx"
-import { Drawer } from "./Drawer.tsx"
+import { Spark } from "./components/Spark.tsx"
+import { Drawer } from "./components/Drawer.tsx"
 import { ConfigProvider, theme } from "antd"
 import { useDarkMode } from "./styles/useDarkMode.tsx"
 import { darkTheme, lightTheme } from "./styles/theme.css.ts"
@@ -65,6 +65,7 @@ function App() {
         />
         <Drawer open={open} setOpen={setOpen} />
       </div>
+      <hr id="divider" className={styles.divider} />
     </ConfigProvider>
   )
 }

@@ -21,6 +21,8 @@ const colors = createThemeContract({
   palette3: "",
   palette4: "",
   palette5: "",
+  jameson: "",
+  david: "",
 })
 export const lightTheme = createTheme(colors, {
   background: "#fff",
@@ -31,6 +33,8 @@ export const lightTheme = createTheme(colors, {
   palette3: "#fee440",
   palette4: "#00bbf9",
   palette5: "#00f5d4",
+  jameson: "yellow",
+  david: "orange",
 })
 export const darkTheme = createTheme(colors, {
   background: "#121212",
@@ -41,6 +45,8 @@ export const darkTheme = createTheme(colors, {
   palette3: "#fee440",
   palette4: "#00bbf9",
   palette5: "#00f5d4",
+  jameson: "yellow",
+  david: "orange",
 })
 
 export default { ...root, colors }

@@ -1,10 +1,11 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Drawer as AntdDrawer } from "antd"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 
-import * as styles from "./styles/styles.css"
-import tokens from "./styles/theme.css"
+import * as styles from "../styles/styles.css"
+import tokens from "../styles/theme.css"
+import { AddQuote } from "./AddQuote"
 
 export const Drawer = ({
   open,
@@ -14,15 +15,30 @@ export const Drawer = ({
   setOpen: (open: boolean) => void
 }) => {
   const animationBarRef = useRef<HTMLDivElement>(null)
-  const colorIndexRef = useRef<number>(0)
+  const [colorIndex, setColorIndex] = useState<number>(0)
+  const [addingQuote, setAddingQuote] = useState<boolean>(false)
 
-  const paletteKeys: Array<keyof typeof tokens.colors> = [
-    "palette1",
-    "palette2",
-    "palette3",
-    "palette4",
-    "palette5",
-  ]
+  useEffect(() => {
+    if (!open) return
+
+    setColorIndex((prev) => prev + 1)
+    const colorChange = setInterval(() => {
+      setColorIndex((prev) => (prev === 4 ? 0 : prev + 1))
+    }, 2000)
+
+    return () => clearInterval(colorChange)
+  }, [open])
+
+  useGSAP(() => {
+    if (!open) return
+
+    gsap.to(animationBarRef.current, {
+      backgroundColor:
+        tokens.colors[`palette${colorIndex}` as keyof typeof tokens.colors],
+      duration: 2,
+      ease: "power2.inOut",
+    })
+  }, [colorIndex, open])
 
   useGSAP(() => {
     if (open && animationBarRef.current) {
@@ -30,28 +46,6 @@ export const Drawer = ({
         animationBarRef.current,
         { width: 0 },
         { width: "100%", duration: 1.5, ease: "bounce.out" }
-      )
-
-      gsap.timeline({ repeat: -1 }).fromTo(
-        animationBarRef.current,
-        { backgroundColor: tokens.colors[paletteKeys[colorIndexRef.current]] },
-        {
-          backgroundColor:
-            tokens.colors[
-              paletteKeys[(colorIndexRef.current + 1) % paletteKeys.length]
-            ],
-          duration: 2,
-          ease: "power2.inOut",
-          onUpdate: () => {
-            if (animationBarRef.current)
-              animationBarRef.current.style.backgroundColor =
-                tokens.colors[paletteKeys[colorIndexRef.current]]
-          },
-          onComplete: () => {
-            colorIndexRef.current =
-              (colorIndexRef.current + 1) % paletteKeys.length
-          },
-        }
       )
     }
 
@@ -70,6 +64,7 @@ export const Drawer = ({
         title="Basic Drawer"
         onClose={() => setOpen(false)}
         open={open}
+        zIndex={1001}
       >
         <div className={styles.drawer}>
           <div ref={animationBarRef} className={styles.animationBar} />
@@ -88,7 +83,10 @@ export const Drawer = ({
               you love.
             </h5>
             <p>More inspiration will be constantly added.</p>
-            <hr style={{ width: "70%", margin: "30px auto" }} />
+            <hr
+              style={{ width: "70%", margin: "30px auto" }}
+              onClick={() => setAddingQuote(true)}
+            />
             <p style={{ fontSize: "12px" }}>
               Created by{" "}
               <a href="https://jamesonb.com" target="_blank">
@@ -99,6 +97,8 @@ export const Drawer = ({
                 Atomic10 Studio
               </a>
             </p>
+
+            {addingQuote && <AddQuote setAddingQuote={setAddingQuote} />}
           </div>
         </div>
       </AntdDrawer>
